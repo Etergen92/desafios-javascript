@@ -1,4 +1,5 @@
-# desafios-javascript
-Serie de desafíos aplicando lo aprendido en el curso de Javascript de Coderhouse
+# Desafios Javascript
 
-Desafio Complementario 1: Desarrollo de tablas de multiplicar segun numero ingresado por usuaroip utilizando ciclos por conteo y ciclos condicionales.
+## Serie de desafíos aplicando lo aprendido en el curso de Javascript de Coderhouse
+
+1. Desafio Complementario 1: Desarrollo de tablas de multiplicar segun numero ingresado por usuario utilizando ciclos por conteo y ciclos condicionales.
