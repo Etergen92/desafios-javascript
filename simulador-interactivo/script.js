@@ -1,6 +1,6 @@
 // Algoritmo que calcula promedio y nota final del alumno
 
-// Función validadora de nota(valida que las notas sena mayor a 0 y menor a 10)
+// Función validadora de nota(valida que las notas sea mayor a 0 y menor o igual a 10)
 
 const validadorNota = function(){
     let nota
