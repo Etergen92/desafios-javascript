@@ -56,9 +56,9 @@ const infoCondicionALumno = function(arrayAlumnos){
 }
 
 // Creacion de array de alumnos:
-
 let alumnosPrimerAnio = []
 
+// Pedido a usuario de cantidad de alumnos a cargar:
 let cantidadAlumnos = parseInt(prompt('Ingrese la cantidad de alumnos que desea cargar: '))
 
 
@@ -67,7 +67,6 @@ for(i = 0; i < cantidadAlumnos; i++){
     let alumno = new Alumno((prompt('Ingrese el numero de ID del alumno: ')), (prompt('Ingrese el nombre del alumno: ')), parseInt(validadorNota()), parseInt(validadorNota()), parseInt(validadorNota()))
     alumnosPrimerAnio.push(alumno)
 }
-
 
 //Llamada a función para conocer condición del alumno:
 infoCondicionALumno(alumnosPrimerAnio)
