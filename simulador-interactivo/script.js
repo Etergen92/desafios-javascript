@@ -10,6 +10,7 @@ const validadorNota = function(){
     return nota
 }
 
+
 // Clase alumno:
 
 class Alumno{
@@ -30,47 +31,114 @@ class Alumno{
 
 // Función de registro que muestra en pantalla toda la info de notas de los alumnos, asi como su conidición final
 
-const infoCondicionALumno = function(arrayAlumnos){
-    for(Alumno of arrayAlumnos){
+const infoCondicionAlumno = function(arrayAlumnos){
+    for(alumno of arrayAlumnos){
         console.log('--------------------------------------------------------------------')
-        console.log(`--------REGISTRO DE NOTAS DEL ALUMNO: ${Alumno.nombre}--------`)
-        console.log(`ID: ${Alumno.id}`)
-        console.log(`NOTA 1: ${Alumno.nota1}`)
-        console.log(`NOTA 2: ${Alumno.nota2}`)
-        console.log(`NOTA 3: ${Alumno.nota3}`)
+        console.log(`--------REGISTRO DE NOTAS DEL ALUMNO: ${alumno.nombre}--------`)
+        console.log(`ID: ${alumno.id}`)
+        console.log(`NOTA 1: ${alumno.nota1}`)
+        console.log(`NOTA 2: ${alumno.nota2}`)
+        console.log(`NOTA 3: ${alumno.nota3}`)
 
-        let promedio = Alumno.promedio()
-    
+        let promedio = alumno.promedio()
+        
+        alumno.notaFinal = promedio
+
         if (promedio < 4){
+            alumno.condicion = 'LIBRE'
             console.log(`LA NOTA FINAL PROMEDIO DEL ALUMNO ES : ${promedio}`)
-            console.log(`CONDICIÓN FINAL : LIBRE`)
+            console.log(`CONDICIÓN FINAL : ${alumno.condicion}`)
         } else if(promedio < 8){
+            alumno.condicion = 'REGULAR'
             console.log(`LA NOTA FINAL PROMEDIO DEL ALUMNO ES : ${promedio}`)
-            console.log(`CONDICIÓN FINAL : REGULAR`)
+            console.log(`CONDICIÓN FINAL : ${alumno.condicion}`)
         } else if(promedio <= 10){
+            alumno.condicion = 'PROMOVIDO'
             console.log(`LA NOTA FINAL PROMEDIO DEL ALUMNO ES : ${promedio}`)
-            console.log(`CONDICIÓN FINAL : PROMOVIDO`)
+            console.log(`CONDICIÓN FINAL : ${alumno.condicion}`)
         } else{console.log(`DEBE INGRESAR NOTAS VÁLIDAS...`)}
+
+        console.log('\n')
+        console.log('--------------------------------------------------------------------')
+        console.log('\n')
     }
 
 }
 
-// Creacion de array de alumnos:
-let alumnosPrimerAnio = []
 
-// Pedido a usuario de cantidad de alumnos a cargar:
-let cantidadAlumnos = parseInt(prompt('Ingrese la cantidad de alumnos que desea cargar: '))
+function cargaAlumnos(arrayAlumno){
+    let cantidadAlumnos = parseInt(prompt('Ingrese la cantidad de alumnos a cargar: '))
+    for(i = 0; i < cantidadAlumnos; i++){
+        let alumno = new Alumno(parseInt(prompt('Ingrese el numero de ID del alumno: ')), (prompt('Ingrese el nombre del alumno: ')), parseInt(validadorNota()), parseInt(validadorNota()), parseInt(validadorNota()))
+        arrayAlumno.push(alumno)
+    }
+    console.log('\n')
+    console.log(('------------ALUMNOS CARGADOS------------'))
+    console.log('\n')
 
-
-// Ciclo a utilizar para crear objeto alumnos segun la cantidad informada por el usuario:
-for(i = 0; i < cantidadAlumnos; i++){
-    let alumno = new Alumno((prompt('Ingrese el numero de ID del alumno: ')), (prompt('Ingrese el nombre del alumno: ')), parseInt(validadorNota()), parseInt(validadorNota()), parseInt(validadorNota()))
-    alumnosPrimerAnio.push(alumno)
 }
 
+function listaCondicionAlumnos(arrayAlumnos){
+    let condicionBuscada;
+
+    do{
+        condicionBuscada = prompt('Ingrese la condición que desea buscar(recuerde que se le mostrara un listado de los alumnos según la condición que ingrese): ').toUpperCase()
+    }while(condicionBuscada != 'LIBRE' && condicionBuscada != 'REGULAR' && condicionBuscada != 'PROMOVIDO')
+
+    const resultado = arrayAlumnos.filter((alumno) => alumno.condicion === condicionBuscada)
+    if(resultado != undefined){
+        const listaFinal = resultado.map((alumno) => alumno.nombre)
+        console.log(`Alumnos con condición ${condicionBuscada}: \n${listaFinal.join('\n')}`) 
+        console.log('--------------------------------------------------------------------')
+        console.log('\n')
+    }else(alert('Alumno no encontrado o condicion ingresada incorrecta'))
+}
+
+function eliminarAlumno(arrayAlumnos){
+
+    let idAlumno = parseInt(prompt('Ingrese el ID del alumno a borrar del registro: '))
+    const index = arrayAlumnos.findIndex(alumno => alumno.id === idAlumno);
+    if (index != -1){
+        arrayAlumnos.splice(index, 1)
+        console.log('\n')
+        console.log((`------------ALUMNO ELIMINADO------------`))
+        console.log('\n')
+    }else(alert('------------ALUMNO NO ENCONTRADO------------'))
+    console.log('\n')
+}
+
+function menuRegistroAlumnos(){
+    let opcion = parseInt(prompt('Ingrese el numero de opción segun la acción que desea realizar(0 a 4): \n 1 - Cargar alumnos nuevos \n 2 - Consultar registro de alumnos \n 3 - Buscar listado alumnos según condición\n 4 - Eliminar alumno\n 0 - Salir'))
+    return opcion   
+}
+
+function opcionesPrograma(arrayAlumnos){
+
+    alert('-------------Bienvenido al registro de Alumnos----------------')
+    let opcionUsuario = menuRegistroAlumnos()
+
+    while(opcionUsuario != 0){
+        if(opcionUsuario === 1){
+            cargaAlumnos(arrayAlumnos)
+            opcionUsuario = menuRegistroAlumnos()
+        }else if(opcionUsuario === 2){
+            infoCondicionAlumno(arrayAlumnos)
+            opcionUsuario = menuRegistroAlumnos()
+        }else if(opcionUsuario === 3){
+            listaCondicionAlumnos(arrayAlumnos)
+            opcionUsuario = menuRegistroAlumnos()
+        }else if(opcionUsuario === 4){
+            eliminarAlumno(arrayAlumnos)
+            opcionUsuario = menuRegistroAlumnos()
+        }
+
+    }
+    alert('Gracias por su visita')  
+}     
+
 //Llamada a función para conocer condición del alumno:
-infoCondicionALumno(alumnosPrimerAnio)
 
+arrayAlumno = [];
 
-
-
+opcionesPrograma(arrayAlumno)
+    
