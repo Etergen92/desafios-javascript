@@ -65,7 +65,7 @@ const infoCondicionAlumno = function(arrayAlumnos){
 
 }
 
-
+// Funcion para cargar alumnos
 function cargaAlumnos(arrayAlumno){
     let cantidadAlumnos = parseInt(prompt('Ingrese la cantidad de alumnos a cargar: '))
     for(i = 0; i < cantidadAlumnos; i++){
@@ -78,6 +78,7 @@ function cargaAlumnos(arrayAlumno){
 
 }
 
+// Funcion que devuelve listado de alumnos que cumplan la condicion pedida
 function listaCondicionAlumnos(arrayAlumnos){
     let condicionBuscada;
 
@@ -94,6 +95,7 @@ function listaCondicionAlumnos(arrayAlumnos){
     }else(alert('Alumno no encontrado o condicion ingresada incorrecta'))
 }
 
+// Funcion para eliminar registro de alumno
 function eliminarAlumno(arrayAlumnos){
 
     let idAlumno = parseInt(prompt('Ingrese el ID del alumno a borrar del registro: '))
@@ -107,11 +109,13 @@ function eliminarAlumno(arrayAlumnos){
     console.log('\n')
 }
 
+// Funcion para mostrar el menu de opciones del programa
 function menuRegistroAlumnos(){
     let opcion = parseInt(prompt('Ingrese el numero de opción segun la acción que desea realizar(0 a 4): \n 1 - Cargar alumnos nuevos \n 2 - Consultar registro de alumnos \n 3 - Buscar listado alumnos según condición\n 4 - Eliminar alumno\n 0 - Salir'))
     return opcion   
 }
 
+// Funcion que ejecuta la tarea elegida por el usuario 
 function opcionesPrograma(arrayAlumnos){
 
     alert('-------------Bienvenido al registro de Alumnos----------------')
