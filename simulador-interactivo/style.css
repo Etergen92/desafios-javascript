@@ -1,0 +1,9 @@
+.tarjeta{
+    display: flex;
+}
+
+.cardFlex{
+    flex-grow: 1;
+    flex-wrap: wrap;
+    margin: 20px;
+}
